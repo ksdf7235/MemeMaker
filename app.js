@@ -3,15 +3,18 @@ const ctx = canvas.getContext("2d");
 canvas.width = 800;
 canvas.height = 800;
 
-ctx.fillRect(210, 200, 15, 100);
-ctx.fillRect(350, 200, 15, 100);
-ctx.fillRect(260, 200, 60, 100);
+ctx.lineWidth = 2;
+ctx.moveTo(0, 0);
 
-ctx.arc(285, 150, 50, 0, 2 * Math.PI);
-ctx.fill();
+const colors = ["red", "orange", "yellow", "green", "blue", "indigo", "purple"];
 
-ctx.beginPath();
-ctx.arc(260, 150, 8, 0, 2 * Math.PI);
-ctx.arc(310, 150, 8, 0, 2 * Math.PI);
-ctx.fillStyle = "white";
-ctx.fill();
+function onClick(e) {
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  const color = colors[Math.floor(Math.random() * colors.length)];
+  ctx.strokeStyle = color;
+  ctx.lineTo(e.offsetX, e.offsetY);
+  ctx.stroke();
+}
+
+canvas.addEventListener("mousemove", onClick);
